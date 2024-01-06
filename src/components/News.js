@@ -89,8 +89,6 @@ class News extends Component {
                 currentPage: page,
             }));
             this.props.setProgress(100);
-            console.log('Articles length:', this.state.articles.length);
-            console.log('Total results:', this.state.totalResults);
         } catch (error) {
             this.props.setProgress(10);
             alert('Error fetching news:', error);
@@ -104,7 +102,6 @@ class News extends Component {
     }
 
     fetchMoreData = () => {
-        this.setState({ loading: false });
         const nextPage = this.state.currentPage + 1;
         this.updateNews(nextPage);
     };
@@ -149,9 +146,9 @@ class News extends Component {
                 </div>
                 <h1 className={`text-center my-3 text-${this.props.mode === 'light' ? 'dark' : 'light'}`}>Global Glimpse - Top {this.capitalizeFirstLetter(this.props.category)} Headlines</h1>
                 <InfiniteScroll
-                    dataLength={this.state.articles ? this.state.articles.length : 0}
+                    dataLength={this.state.articles.length}
                     next={this.fetchMoreData}
-                    hasMore={this.state.articles ? this.state.articles.length < this.state.totalResults : false}
+                    hasMore={this.state.articles.length + 1 < this.state.totalResults}
                     loader={<Spinner />}
                 >
                     <div className="container">
