@@ -1,9 +1,11 @@
-import './App.css';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import News from './components/News';
 import LoadingBar from 'react-top-loading-bar';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import notify from './components/Notification';
 
 export class App extends Component {
 
@@ -26,11 +28,13 @@ export class App extends Component {
         mode: 'dark'
       });
       document.body.style.backgroundColor = "#33628d";
+      notify("Dark mode enabled", "success", "dark");
     } else {
       this.setState({
         mode: 'light'
       });
       document.body.style.backgroundColor = "white";
+      notify("Dark mode disabled", "success", "light");
     }
   }
 
@@ -43,6 +47,7 @@ export class App extends Component {
           progress={this.state.progress}
         />
         <NavBar mode={this.state.mode} toggleMode={this.handleDarkMode} />
+        <ToastContainer />
         <Routes>
           <Route path='/' element={<News setProgress={this.setProgress}  mode={this.state.mode} key="general" pageSize="10" category="general" />} />
           <Route path='/business' element={<News setProgress={this.setProgress}  mode={this.state.mode} key="business" pageSize="10" category="business" />} />
