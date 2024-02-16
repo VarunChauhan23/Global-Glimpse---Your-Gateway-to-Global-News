@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import News from './components/News';
+import Navbar from './components/Navbar Component/NavBar';
+import News from "./components/News Components/News";
+import SignUpPage from "./components/Authentication/SignUpPage";
+import LoginPage from "./components/Authentication/LoginPage";
+import VerifyEmailPage from "./components/Authentication/VerifyEmailPage";
 import LoadingBar from 'react-top-loading-bar';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import notify from './components/Notification';
+import notify from "./components/Other Components/Notification";
 
 export class App extends Component {
 
@@ -46,7 +49,7 @@ export class App extends Component {
           color='#f11946'
           progress={this.state.progress}
         />
-        <NavBar mode={this.state.mode} toggleMode={this.handleDarkMode} />
+        <Navbar mode={this.state.mode} toggleMode={this.handleDarkMode} setProgress={this.setProgress} />
         <ToastContainer />
         <Routes>
           <Route path='/' element={<News setProgress={this.setProgress}  mode={this.state.mode} key="general" pageSize="10" category="general" />} />
@@ -56,6 +59,9 @@ export class App extends Component {
           <Route path='/science' element={<News setProgress={this.setProgress}  mode={this.state.mode} key="science" pageSize="10" category="science" />} />
           <Route path='/sports' element={<News setProgress={this.setProgress}  mode={this.state.mode} key="sports" pageSize="10" category="sports" />} />
           <Route path='/technology' element={<News setProgress={this.setProgress}  mode={this.state.mode} key="technology" pageSize="10" category="technology" />} />
+          <Route path="/SignUp" element={<SignUpPage setProgress={this.setProgress}  mode={this.state.mode} />} />
+          <Route path="/verifyEmail/:userId" element={<VerifyEmailPage setProgress={this.setProgress}  mode={this.state.mode} />} />
+          <Route path="/Login" element={<LoginPage setProgress={this.setProgress}  mode={this.state.mode} />} />
         </Routes>
       </Router>
     )

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
-import Spinner from "./Spinner";
+import Spinner from "../Other Components/Spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
-import notify from "./Notification";
+import notify from "../Other Components/Notification";
 
 class News extends Component {
   countries = {
